@@ -1,0 +1,95 @@
+{% extends 'Weather/base.html' %}
+
+{% block title%}About Us ~WeatherCheck {% endblock %}
+{% block ab %} active {% endblock %}
+{% block about %} (current) {% endblock %}
+{% block css %}
+#name1 {
+border-style: solid;
+border-width:3px;
+border-color:black;
+border-radius:20px;
+}
+#email1 {
+border-style: solid;
+border-width:3px;
+border-color:black;
+border-radius:20px;
+}
+#phone1 {
+border-style: solid;
+border-width:3px;
+border-color:black;
+border-radius:20px;
+}
+#review {
+border-style: solid;
+border-width:3px;
+border-color:black;
+border-radius:20px;
+}
+
+{% endblock %}
+{% block body %}
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+      <h1 align="center"><span id="typedabout"></span></h1>
+      <h2 class="display">WeatherCheck :</h2>
+      <div class="container">
+      <p><bold>
+          Hey, I am Anirudh Sharma a B.E first year Student.<br>
+          From my childhood i was too attracted towards the latest technologies. As i grew up and slowly and became aware of the technologies that a person should master before he steps into the real tech world as an developer.
+          I learned some of these technologies (python and django full stack ) and here is my 1st django project that i am bringing live.<br>
+          I therefore request you to kindly support and provide me some reviews on my project by filling a small form below.<br>
+          I will be highly obliged if you do so.
+      </bold>
+      </p>
+    </div>
+  </div>
+  <div class="container my-1s">
+      <div class="myfrm" align="center">
+           <h1>Review Form</h1>
+      <form method="post" action="/about/">
+          {% csrf_token %}
+          <div class="form-group col-md-6">
+             <label for="inputName">Name</label>
+              <input type="text" class="form-control" id="name1" name="name1">
+          </div>
+          <div class="form-group col-md-6">
+             <label for="inputEmail">Email</label>
+              <input type="email" class="form-control" id="email1" name="email1">
+          </div>
+          <div class="form-group col-md-6">
+              <label for="inputPhone">Phone Number</label>
+              <input type="number" class="form-control" id="phone1" name="phone1">
+          </div>
+          <div class="form-group col-md-6">
+             <label for="inputreview">Your review</label>
+              <textarea rows="7" cols="50" class="form-control" id="review" name="review"></textarea>
+          </div>
+          <button type="submit" class="btn btn-info my-2">Submit</button>
+      </form>
+          </div>
+
+  </div>
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.9/typed.min.js"></script>
+<script>
+    window.onload = function () {
+        console.log("loaded")
+        var typed = new Typed('#typedabout', {
+            strings: ["Welcome to WeatherCheck !", "Kindly review the site.", "Thank you !"],
+            backSpeed: 15,
+            smartBackspace: true,
+            backDelay: 1200,
+            startDelay: 1000,
+            typeSpeed: 25,
+            loop: true,
+        });
+    };
+</script>
+{% endblock %}

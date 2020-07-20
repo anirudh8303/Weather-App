@@ -1,0 +1,78 @@
+{% extends 'Weather/base.html' %}
+{% block title %}Welcome to WeatherCheck !{% endblock %}
+{% block aa %} active {% endblock %}
+{% block home%} (current) {% endblock %}
+
+{% block  css %}
+ #heading {
+font-size: 150%;
+color:black;
+}
+#exampleInputLocation {
+border-style: solid;
+border-width:3px;
+border-color:black;
+border-radius:20px;
+}
+{% endblock %}
+
+
+
+{% block body %}
+
+<section class="jumbotron text-center" >
+    <div class="container">
+        <h1 class="jumbotron-heading"><span id="typed"></span></h1>
+        <p class="lead text-muted">Stay Connected with us and stay safe !</p>
+        <p>
+            <a href="/tweets" class="btn btn-success my-2">View IMD Tweets</a>
+            <a href="/contact" class="btn btn-danger my-2">Contact Me</a>
+        </p>
+    </div>
+</section>
+<div class="container my-2" >
+   <form method="post" >
+       {% csrf_token %}
+  <div class="form-group my-5" align="center">
+      <label for="exampleInputText" id="heading"><b>Enter Your Location !</b></label>
+    <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="Enter Your Location" name="city_name" required>
+     <div class="my-3" >
+  <button type="submit" class="btn btn-primary">Add City</button>
+     </div>
+  </div>
+   </form>
+    {% for cityweather in weather_data %}
+    <div class="card-deck">
+       <div class="card my-2" style="width: 18rem;">
+         <div class="card-body">
+           <h5 class="card-title">City-Name : {{cityweather.cityn}}</h5>
+           <p class="card-text">Temprature : {{cityweather.temprature}} °C</p>
+           <p class="card-text">Weather-Description : {{cityweather.description}}</p>
+              <div class="mycls" align="center">
+                 <a href="{% url 'delete_city' cityweather.cityn %}"><button type="delete" class="btm btn-danger">Remove City</button> </a>
+             </div>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
+
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.9/typed.min.js"></script>
+<script>
+    window.onload = function () {
+        console.log("loaded")
+        var typed = new Typed('#typed', {
+            strings: ["Welcome to WeatherCheck !", "Always check the weather situation before you step out!", "Add Locations !", "Check updates !"],
+            backSpeed: 15,
+            smartBackspace: true,
+            backDelay: 1200,
+            startDelay: 1000,
+            typeSpeed: 25,
+            loop: true,
+        });
+    };
+</script>
+ {% endblock %}

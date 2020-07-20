@@ -1,0 +1,59 @@
+{% extends 'Weather/base.html' %}
+{% block title%} Contact Us {% endblock %}
+{% block ac %} active {% endblock %}
+{% block contact%} (current) {% endblock %}
+{% block css %}
+#email2 {
+border-style: double;
+border-width:3px;
+border-color:red;
+border-radius:20px;
+}
+#name2 {
+border-style: double;
+border-width:3px;
+border-color:red;
+border-radius:20px;
+}
+#phone2 {
+border-style: double;
+border-width:3px;
+border-color:red;
+border-radius:20px;
+}
+#query {
+border-style: double;
+border-width:3px;
+border-color:red;
+border-radius:20px;
+}
+{% endblock %}
+
+{% block body %}
+<body style="background-color:rgb(40,40,40);">
+<div class="container my-2">
+        <h1 style="  font-style: italic; color:red;">Contact Us :</h1>
+         <form method="post" action="/contact/">
+          {% csrf_token %}
+          <div class="form-group ">
+             <label for="inputName"style="color:red;">Name</label>
+              <input type="text" class="form-control mx-2" id="name2" name="name2" placeholder="Enter Your Name" required>
+          </div>
+          <div class="form-group">
+             <label for="inputEmail"style="color:red;">Email</label>
+              <input type="email" class="form-control mx-2" id="email2" name="email2"placeholder="Enter Your email" required>
+          </div>
+          <div class="form-group ">
+              <label for="inputPhone" style="color:red;">Phone Number</label>
+              <input type="number" class="form-control mx-2" id="phone2" name="phone2" placeholder="Enter Your Contact Number" required>
+          </div>
+          <div class="form-group ">
+             <label for="inputquery"style="color:red;">Your Query ?</label>
+              <textarea rows="7" cols="70" class="form-control mx-1" id="query" name="query"placeholder="Enter Your Query here ?" required></textarea>
+          </div>
+            <button type="submit" class="btn btn-danger my-2">Submit</button>
+      </form>
+
+</div>
+</body>
+{% endblock %}
