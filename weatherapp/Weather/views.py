@@ -84,11 +84,18 @@ def handleSignUp(request):
         username = request.POST['username1']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
-
-        myuser = User.objects.create_user(username, email1, pass1)
-        myuser.save()
-        messages.success(request, "You are Signed-Up")
-        return redirect('/')
+        if pass1 == pass2:
+            if username.isalnum == True:
+              myuser = User.objects.create_user(username, email1, pass1)
+              myuser.save()
+              messages.success(request, "You are Signed-Up")
+              return redirect('/')
+            else:
+                messages.warning(request,"Username should be alpha-numeric only !")
+                return redirect('/')
+        else:
+            messages.warning(request, "Passwords did not match !")
+            return redirect('/')
     else:
         return HttpResponse('404-Not Found')
 
